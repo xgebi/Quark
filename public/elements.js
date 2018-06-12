@@ -1,4 +1,18 @@
+class App extends HTMLElement {
+    connectedCallback() {
+        let paragraph = document.createElement("p");
+        paragraph.textContent = "This is not inside of Shadow DOM"
+        this.appendChild(paragraph);
+        let sideBar = document.createElement("side-bar");
+        sideBar.setAttribute('text', 'second sidebar');
+        this.appendChild(sideBar);
+        
+    }
+}
+customElements.define('my-app', App);
+
 class SideBar extends HTMLElement {
+    
     constructor() {
         super();
 
@@ -7,10 +21,14 @@ class SideBar extends HTMLElement {
 
         let style = document.createElement('style');
         style.textContent = "p { background: sandybrown; color: darkblue; }";
-        let paragraph = document.createElement('p');
-        paragraph.textContent = "Hello, this is my first custom element and future sidebar!";
+        this.paragraph = document.createElement('p');    
+        this.paragraph.textContent = "Lorem ipsum";
         shadow.appendChild(style);
-        shadow.appendChild(paragraph);
+        shadow.appendChild(this.paragraph);
+    }
+
+    connectedCallback() {
+        this.paragraph.textContent = this.getAttribute('text');
     }
 }
 customElements.define('side-bar', SideBar);

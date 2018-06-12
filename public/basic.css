@@ -4,3 +4,7 @@ body {
     display: grid;
     grid-template-columns: 250px auto;    
 }
+
+p {
+    text-decoration: underline;
+}
